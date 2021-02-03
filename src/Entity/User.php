@@ -77,6 +77,14 @@ class User implements UserInterface
      */
     private $pseudo;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $role;
+
+
+
+
     public function __construct()
     {
         $this->outings = new ArrayCollection();
@@ -244,12 +252,12 @@ class User implements UserInterface
 
     public function getRoles() :array
     {
-        $role=$this->roles;
+       // $role=$this->role;
 
-        $roles[] = 'ROLE_USER';
+       // $roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
-
+       // return array_unique($roles);
+        return ['ROLE_USER'];
     }
 
     /*
@@ -284,6 +292,18 @@ class User implements UserInterface
     public function setPseudo(string $pseudo): self
     {
         $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }

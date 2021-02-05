@@ -11,31 +11,30 @@
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            Salut , tu est connecté en tant que : M.{{ app.user.username |capitalize }}, <a href="{{ path('app_logout') }}">te déconnecter</a>
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputMail">Login</label>
+    <h1 class="h3 mb-3 font-weight-normal">Veuillez renseignez les champs suivant :</h1>
+    <label for="inputMail">Login ( pseudo ou Email )</label>
     <input type="text" value="{{ last_username }}" name="login" id="inputMail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
+    <label for="inputPassword">Mot de passe</label>
     <input type="password" name="password" id="inputPassword" class="form-control" required>
 
     <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+           value="{{ csrf_token('authenticate') }}">
 
 
 
         <div class="checkbox mb-3">
             <label for="remember_me">
-                <input type="checkbox" id="remember_me" name="_remember_me" checked/> Remember me
+                <input type="checkbox" id="remember_me" name="_remember_me" checked> Se souvenir de moi
             </label>
         </div>
 
 
     <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+        Validez
     </button>
 </form>
 {% endblock %}

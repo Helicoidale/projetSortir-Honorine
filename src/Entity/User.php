@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -82,7 +83,11 @@ class User implements UserInterface
      */
     private $role;
 
-
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
 
 
     public function __construct()
@@ -307,4 +312,15 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getPlainPassword():? string
+    {
+       return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+    }
+
 }

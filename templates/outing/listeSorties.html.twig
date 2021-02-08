@@ -3,35 +3,38 @@
 {% block title %} Sortir |{{ parent() }}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>les sorties ✅</h1>
-    <table class="container">
-        <tr>
-            <th>Nom de la sortie</th>
-            <th>date de la sortie</th>
-            <th> clôture </th>
-            <th>inscrits/places</th>
-            <th>Etat</th><th>Inscrit</th>
-            <th>Organisateur</th>
-            <th>Actions</th>
-        </tr>
-            {% for sortie in listeSorties %}
-        <tr>
-        <td>{{ sortie.nom }}</td>
-            <td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td>
-            <td> {{sortie.dateLimiteInscription|date("d/m/Y")}} </td>
-            <td> nbr inscrit ? /{{ sortie.nbInscriptionMax }}</td>
-            <td>{{ sortie.statutEtat.getlibelle}}</td>
-            <td> fonction inscrit ?</td>
-            <td>{{ sortie.organisateur.getnom |capitalize }}</td>
-            <td><a href="{{ path('outing_detailSortie',{'id': sortie.id} ) }}">{{ sortie.id }}---Afficher</a> </td></tr>
->
-            {% endfor %}
-    </table>
-</div>
+        <div class="example-wrapper">
+            <h1>Les sorties : </h1>
+            <div class="container table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table table-bordered table-striped mb-0">
+                    <thead>
+                    <tr>
+                        <th scope="col">Nom de la sortie</th>
+                        <th scope="col">Date de la sortie</th>
+                        <th scope="col">Inscrits/places</th>
+                        <th scope="col">Clôture </th>
+                        <th scope="col">Etat</th><th>Inscrit</th>
+                        <th scope="col">Organisateur</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for sortie in listeSorties %}
+                     <tr>
+                    <td>{{ sortie.nom }}</td>
+                    <td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td>
+                    <td> {{sortie.dateLimiteInscription|date("d/m/Y")}} </td>
+                    <td> nbr inscrit ? /{{ sortie.nbInscriptionMax }}</td>
+                    <td>{{ sortie.statutEtat.getlibelle}}</td>
+                    <td> fonction inscrit ?</td>
+                    <td>{{ sortie.organisateur.getnom |capitalize }}</td>
+                    <td><a href="{{ path('outing_detailSortie',{'id': sortie.id} ) }}">{{ sortie.id }}---Afficher</a> </td>
+                    </tr>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+        </div>
 {% endblock %}

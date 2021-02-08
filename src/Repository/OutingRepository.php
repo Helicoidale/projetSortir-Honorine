@@ -21,8 +21,10 @@ class OutingRepository extends ServiceEntityRepository
 
     public function findSortiesAvecToutesLesInfo()
     {
-        return $this->createQueryBuilder();
+        return $this->createQueryBuilder('s');
     }
+
+
 
     // /**
     //  * @return Outing[] Returns an array of Outing objects

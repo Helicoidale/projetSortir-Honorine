@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Sortie detail |{{ parent() }}{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h2>Afficher une sortie</h2>
+    <h1> sortie {{sortie.nom}}  détail ✅</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-4">Nom de la sortie: {{sortie.nom | capitalize}} </div>
+            <div class=" col-md-4">Campus: {{campus.nom | capitalize}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-2 col-md-4">Date et heure de la sortie: {{sortie.dateHeureDebut|date("d/m/Y")}} </div>
+            <div class=" col-md-4">Lieu: {{sortie.lieu.getnom| capitalize}}</div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-offset-2 col-md-4">Date limite d inscription: {{sortie.dateLimiteInscription|date("d/m/Y")}} </div>
+            <div class=" col-md-4">Rue: {{sortie.lieu.getRue| capitalize}}</div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-offset-2 col-md-4">Nombre de places: {{sortie.nbInscriptionMax}} </div>
+            <div class=" col-md-4">Code Postale: </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-offset-2 col-md-4">Duree:  </div>
+            <div class=" col-md-4">Latitude: {{sortie.lieu.getLatitude|default('non renseigné') }} </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-offset-2 col-md-4">Description: {{sortie.infosSortie}} </div>
+            <div class=" col-md-4">Longitude: {{sortie.lieu.getLongitude|default('non renseigné') }} </div>
+
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}

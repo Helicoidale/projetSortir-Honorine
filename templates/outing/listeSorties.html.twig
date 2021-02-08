@@ -11,10 +11,26 @@
 <div class="example-wrapper">
     <h1>les sorties ✅</h1>
     <table class="container">
-        <tr><th>Nom de la sortie</th><th>date de la sortie</th><th> clôture </th><th>inscrits/places</th><th>Etat</th><th>Inscrit</th><th>Organisateur</th><th>Actions</th></tr>
+        <tr>
+            <th>Nom de la sortie</th>
+            <th>date de la sortie</th>
+            <th> clôture </th>
+            <th>inscrits/places</th>
+            <th>Etat</th><th>Inscrit</th>
+            <th>Organisateur</th>
+            <th>Actions</th>
+        </tr>
             {% for sortie in listeSorties %}
-    <tr><td>{{ sortie.nom }}</td><td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td><td> {{sortie.dateLimiteInscription|date("d/m/Y")}} </td><td> nbr inscrit ?fonction? table ? /{{ sortie.nbInscriptionMax }}</td><td>{{ sortie.etat}}</td><td> fonction inscrit ?</td><td>{{ sortie.organisateur.getnom |capitalize }}</td><td>lien href avec this ?</td></tr>
-
+        <tr>
+        <td>{{ sortie.nom }}</td>
+            <td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td>
+            <td> {{sortie.dateLimiteInscription|date("d/m/Y")}} </td>
+            <td> nbr inscrit ? /{{ sortie.nbInscriptionMax }}</td>
+            <td>{{ sortie.statutEtat.getlibelle}}</td>
+            <td> fonction inscrit ?</td>
+            <td>{{ sortie.organisateur.getnom |capitalize }}</td>
+            <td><a href="{{ path('outing_detailSortie',{'id': sortie.id} ) }}">{{ sortie.id }}---Afficher</a> </td></tr>
+>
             {% endfor %}
     </table>
 </div>

@@ -20,13 +20,9 @@ class UserType extends AbstractType
             ->add('prenom')
             ->add('telephone')
             ->add('mail')
-            //->add('motDePasse')
-            //->add('admin')
-            //->add('actif')
+
             ->add('pseudo')
-            // ->add('role')
-            // ->add('outings')
-            // ->add('campus')
+
             ->add('oldPassword', PasswordType::class, array(
 
                'mapped' => false,

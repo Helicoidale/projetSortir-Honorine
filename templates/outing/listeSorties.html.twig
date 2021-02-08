@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Sortir |{{ parent() }}{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>les sorties ✅</h1>
+    <table class="container">
+        <tr><th>Nom de la sortie</th><th>date de la sortie</th><th> clôture </th><th>inscrits/places</th><th>Etat</th><th>Inscrit</th><th>Organisateur</th><th>Actions</th></tr>
+            {% for sortie in listeSorties %}
+    <tr><td>{{ sortie.nom }}</td><td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td><td> {{sortie.dateLimiteInscription|date("d/m/Y")}} </td><td> nbr inscrit ?fonction? table ? /{{ sortie.nbInscriptionMax }}</td><td>{{ sortie.etat}}</td><td> fonction inscrit ?</td><td>{{ sortie.organisateur.getnom |capitalize }}</td><td>lien href avec this ?</td></tr>
+
+            {% endfor %}
+    </table>
+</div>
+{% endblock %}

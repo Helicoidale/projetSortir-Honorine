@@ -19,9 +19,16 @@ class OutingRepository extends ServiceEntityRepository
         parent::__construct($registry, Outing::class);
     }
 
-    public function findSortiesAvecToutesLesInfo()
+    public function findOutingOuJESuisLOrg($organisateur)
     {
-        return $this->createQueryBuilder('s');
+
+       return $this->createQueryBuilder('o')
+              ->innerJoin('o.organisateur','org')
+              ->andWhere('org= :user')
+              ->setParameter('user', $organisateur)
+              ->getQuery()
+              ->getResult();
+
     }
 
 

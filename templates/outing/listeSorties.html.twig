@@ -6,6 +6,27 @@
 
         <div class="example-wrapper">
             <h1>Les sorties : </h1>
+
+
+
+
+            <form>
+            <div>
+                <input  type="checkbox" id="organisateur" value="{{ user.id }}" name="organisateur">
+                <label for="organisateur">Sortie dont je suis l organisateur</label>
+            </div>
+
+                <INPUT class="btn btn-primary"  type="submit" name="nom" value="valider">
+
+            </form>
+            <br>
+            <a href="{{ path('outing_listeSorties') }}?organisateur={{ user.id }}">Sortie dont je suis l organisateur</a>
+
+
+
+
+
+
             <div class="container table-wrapper-scroll-y my-custom-scrollbar">
                 <table class="table table-bordered table-striped mb-0">
                     <thead>

@@ -44,23 +44,23 @@ class OutingController extends AbstractController
         $nonInscrit=isset($_GET['nonInscrit']) ? $_GET['nonInscrit'] : NULL;
         $sortiesPassees=isset($_GET['sortiesPassees']) ? $_GET['sortiesPassees'] : NULL;
 
-  /*      dump($campusSelected);
+        dump($campusSelected);
         dump($organisateur);
         dump($jeSuisInscrit);
         dump($nonInscrit);
         dump($sortiesPassees);
-*/
+
         //========= passage des champs a la fonction findByFiltre =======
 
         if($campusSelected== null && $organisateur== null && $jeSuisInscrit== null && $nonInscrit== null && $sortiesPassees== null ){
-            dump("je suis là");
+            dump("je suis là fonction ou tout est null");
             $sortiesRepo = $this->getDoctrine()->getRepository(Outing::class);
             $listeSorties = $sortiesRepo->findAll();
         }
         else {
-            dump("sinon je suis la");
+            dump("sinon je suis la foction avec filtre");
             $sortiesRepo = $this->getDoctrine()->getRepository(Outing::class);
-            $listeSorties = $sortiesRepo->findByFiltre($campusSelected, $organisateur);
+            $listeSorties = $sortiesRepo->findByFiltre($campusSelected, $organisateur,$jeSuisInscrit,$nonInscrit,$sortiesPassees);
 
         }
 

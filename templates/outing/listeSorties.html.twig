@@ -17,7 +17,7 @@
 
                         <!-- Choix du campus beandeau deroulant-->
                         <select name="campusSelected" class="form-select" aria-label="Default select example">
-                            <option value="null" selected>Sélectionnez un campus</option>
+                            <option value= ""  selected>Sélectionnez un campus</option>
                             {% for campus in listeCampus %}
                                 <option value="{{ campus.id }}">{{ campus.nom }}</option>
                             {% endfor %}
@@ -31,7 +31,7 @@
                 <label for="organisateur">Sortie dont je suis l organisateur/trice</label>
             </div>
                 <div>
-                    <input  type="checkbox" id="jeSuisInscrit" value="{{ user.id }}" name="JeSuisInscrit">
+                    <input  type="checkbox" id="jeSuisInscrit" value="{{ user.id }}" name="jeSuisInscrit">
                     <label for="JeSiusInscrit">Sorties auxquelles je suis inscrit/e</label>
                 </div>
                 <div>

@@ -3,9 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Outing;
+
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Validator\Constraints\Date;
+
 
 /**
  * @method Outing|null find($id, $lockMode = null, $lockVersion = null)
@@ -32,62 +34,71 @@ class OutingRepository extends ServiceEntityRepository
 
     }
 
-    public function findByFiltre($campusSelected ,$organisateur)
+    public function findByFiltre($campusSelected ,$organisateur,$jeSuisInscrit,$nonInscrit,$sortiesPassees)
     {
         dump("hello");
-        dump("campus",$campusSelected,"orga" ,$organisateur,"inscrit");
-        //,$jeSuisInscrit,"nonInscrit",$nonInscrit,"oldsorties",$sortiesPassees
-        $today = new date();
+        dump("campus :" . $campusSelected . "orga :" . $organisateur . " inscrit :" . $jeSuisInscrit . " nonInscrit :" . $nonInscrit . " oldsorties : " . $sortiesPassees);
+
+        $today = new dateTime();
 
         $queryBuilder = $this->createQueryBuilder('o');
-            $queryBuilder->select('o');
+        $queryBuilder->select('o');
 
 
-        if($campusSelected)
-        {
+        if ($campusSelected) {
             dump("campus {$campusSelected}");
             $queryBuilder = $queryBuilder
                 ->andWhere('o.campus  = :campus')
                 ->setParameter('campus', $campusSelected);
-
         }
 
-        if($organisateur) {
-            dump( "org {$organisateur}");
+        if ($organisateur) {
+            dump("org {$organisateur}");
             $queryBuilder = $queryBuilder
-                ->innerJoin('o.organisateur','org')
+                ->Join('o.organisateur', 'org')
                 ->andWhere('org= :user')
                 ->setParameter('user', $organisateur);
-
-        }
-/*
-        if($jeSuisInscrit)
-       {
-            $queryBuilder =$queryBuilder
-
-                ->andWhere('o.users= :user')
-                ->setParameter('user', $jeSuisInscrit);
-
         }
 
-        if($nonInscrit)
-        {
-           $queryBuilder =$queryBuilder
-                ->andWhere('o.users != :user')
-                ->setParameter('user', $nonInscrit);
 
-        }
-*/
-  /*      if($sortiesPassees)
-        {
+        if (!empty($jeSuisInscrit) && !empty($nonInscrit)) {
 
+            dump("voila voila !");
+
+
+        } else
+            {
+                $queryBuilder
+                    ->addSelect('u')
+                    ->join('o.users', 'u');
+
+                    if ($jeSuisInscrit) {
+                        dump("inscrit {$jeSuisInscrit}");
+
+                        $queryBuilder
+                            ->andWhere('u= :user')
+                            ->setParameter('user', $jeSuisInscrit);
+                    }
+
+                    if ($nonInscrit) {
+                        dump(" nonInscrit {$nonInscrit}");
+                        $queryBuilder
+                            ->andWhere('u!= :user')
+                            ->setParameter('user', $nonInscrit);
+                    }
+            }
+
+
+      if($sortiesPassees)
+              {
+            dump(" sortiePassees  {$nonInscrit}");
             $queryBuilder =$queryBuilder
 
                 ->andWhere('o.dateHeureDebut < :date')
                 ->setParameter('date', $today);
 
         }
-*/
+
 
         return $queryBuilder->getQuery()->getResult();
     }

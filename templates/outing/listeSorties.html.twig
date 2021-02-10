@@ -32,7 +32,7 @@
             </div>
                 <div>
                     <input  type="checkbox" id="jeSuisInscrit" value="{{ user.id }}" name="jeSuisInscrit">
-                    <label for="JeSiusInscrit">Sorties auxquelles je suis inscrit/e</label>
+                    <label for="jeSuisInscrit">Sorties auxquelles je suis inscrit/e</label>
                 </div>
                 <div>
                     <input  type="checkbox" id="nonInscrit" value="{{ user.id }}" name="nonInscrit">
@@ -60,9 +60,10 @@
                     <tr>
                         <th scope="col">Nom de la sortie</th>
                         <th scope="col">Date de la sortie</th>
-                        <th scope="col">Inscrits/places</th>
                         <th scope="col">Clôture </th>
-                        <th scope="col">Etat</th><th>Inscrit</th>
+                        <th scope="col">Inscrits/places</th>
+                        <th scope="col">Etat</th>
+                        <th scope="col">Inscrit</th>
                         <th scope="col">Organisateur</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -72,10 +73,10 @@
                      <tr>
                     <td>{{ sortie.nom }}</td>
                     <td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td>
-                    <td> {{sortie.dateLimiteInscription|date("d/m/Y")}} </td>
-                    <td> nbr inscrit ? /{{ sortie.nbInscriptionMax }}</td>
+                    <td>{{sortie.dateLimiteInscription|date("d/m/Y")}} </td>
+                    <td>nbr inscrit ? /{{ sortie.nbInscriptionMax }}</td>
                     <td>{{ sortie.statutEtat.getlibelle}}</td>
-                    <td> fonction inscrit ?</td>
+                    <td>fonction inscrit ?</td>
                     <td>{{ sortie.organisateur.getnom |capitalize }}</td>
                     <td><a href="{{ path('outing_detailSortie',{'id': sortie.id} ) }}">{{ sortie.id }}---Afficher</a> </td>
                     </tr>

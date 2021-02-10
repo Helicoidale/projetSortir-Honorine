@@ -74,7 +74,6 @@ class OutingRepository extends ServiceEntityRepository
 
                     if ($jeSuisInscrit) {
                         dump("inscrit {$jeSuisInscrit}");
-
                         $queryBuilder
                             ->andWhere('u= :user')
                             ->setParameter('user', $jeSuisInscrit);

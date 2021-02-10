@@ -24,6 +24,12 @@
                         </select>
                     </div>
 
+                    <!-- choix des dates -->
+
+
+
+
+
 
                     <!-- les checkbox-->
             <div>
@@ -71,13 +77,19 @@
                     <tbody>
                     {% for sortie in listeSorties %}
                      <tr>
-                    <td>{{ sortie.nom }}</td>
-                    <td>{{ sortie.dateHeureDebut|date("d/m/Y") }}</td>
+                    <td>{{sortie.nom }}</td>
+                    <td>{{sortie.dateHeureDebut|date("d/m/Y") }}</td>
                     <td>{{sortie.dateLimiteInscription|date("d/m/Y")}} </td>
-                    <td>nbr inscrit ? /{{ sortie.nbInscriptionMax }}</td>
-                    <td>{{ sortie.statutEtat.getlibelle}}</td>
-                    <td>fonction inscrit ?</td>
-                    <td>{{ sortie.organisateur.getnom |capitalize }}</td>
+                    <td>{{sortie.users | length }} /{{ sortie.nbInscriptionMax }}</td>
+                    <td>{{sortie.statutEtat.getlibelle}}</td>
+                    <td>{% for bob in sortie.users %}
+                            {% if bob.id is same as user.id %}
+                                X
+                            {% else%}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{sortie.organisateur.getnom |capitalize }}</td>
                     <td><a href="{{ path('outing_detailSortie',{'id': sortie.id} ) }}">{{ sortie.id }}---Afficher</a> </td>
                     </tr>
 

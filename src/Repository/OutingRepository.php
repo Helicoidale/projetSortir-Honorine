@@ -90,12 +90,10 @@ class OutingRepository extends ServiceEntityRepository
 
       if($sortiesPassees)
               {
-            dump(" sortiePassees  {$nonInscrit}");
-            $queryBuilder =$queryBuilder
-
+            dump(" sortiePassees  {$sortiesPassees}");
+            $queryBuilder
                 ->andWhere('o.dateHeureDebut < :date')
                 ->setParameter('date', $today);
-
         }
 
 

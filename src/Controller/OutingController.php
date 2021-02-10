@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Campus;
 use App\Entity\Outing;
-use Doctrine\ORM\EntityManagerInterface;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,34 +25,75 @@ class OutingController extends AbstractController
     /**
      * @Route ("/outing/listeSorties" , name="outing_listeSorties")
      */
-    public function listeSorties(Request $request,EntityManagerInterface $entityManager):Response
+    public function listeSorties(Request $request):Response
     {
         dump($request->query->all());
+
         $user=$this->getUser();
-        $organisateur=$request->query->get('organisateur','id');
+
+        // permet de recupere les campus pour le menu deroulant de la vue
+
+        $campusRepo=$this->getDoctrine()->getRepository(Campus::class);
+        $listeCampus=$campusRepo->findAll();
+
+
+
+        //========= récupération de tous les champs =========
+
+        $campusSelected=isset($_GET['campusSelected']) ? $_GET['campusSelected'] : NULL;
+        $organisateur=isset($_GET['organisateur']) ? $_GET['organisateur'] : NULL;
+        $jeSuisInscrit=isset($_GET['jeSuisInscrit']) ? $_GET['jeSuisInscrit'] : NULL;
+        $nonInscrit=isset($_GET['nonInscrit']) ? $_GET['nonInscrit'] : NULL;
+        $sortiesPassees=isset($_GET['sortiesPassees']) ? $_GET['sortiesPassees'] : NULL;
+
+        /*
+        dump($campusSelected);
         dump($organisateur);
+        dump($jeSuisInscrit);
+        dump($nonInscrit);
+        dump($sortiesPassees);
+*/
 
-         if($organisateur != NAN){
-             dump("hello");
+
+        //========= passage des champs a la fonction findByFiltre =======
 
 
-             $sortiesRepo=$this->getDoctrine()->getRepository(Outing::class);
-             $listeSorties=$sortiesRepo->findOutingOuJESuisLOrg($organisateur);
 
-             return $this->render('outing/listeSorties.html.twig',[
-                 'listeSorties'=>$listeSorties,
-                 'user'=>$user,
-             ]);
+        if($campusSelected== null && $organisateur== null && $jeSuisInscrit== null && $nonInscrit== null && $sortiesPassees== null ){
+            dump("je suis là");
+            $sortiesRepo = $this->getDoctrine()->getRepository(Outing::class);
+            $listeSorties = $sortiesRepo->findAll();
+        }
+        else {
+            dump("sinon je suis la");
+            $sortiesRepo = $this->getDoctrine()->getRepository(Outing::class);
+            $listeSorties = $sortiesRepo->findByFiltre($campusSelected, $organisateur);
 
-         }
+        }
 
-        $sortiesRepo=$this->getDoctrine()->getRepository(Outing::class);
-        $listeSorties=$sortiesRepo->findAll();
+        //$sortiesRepo=$this->getDoctrine()->getRepository(Outing::class);
+       // if(empty($organisateur)){
+       //     $listeSorties=$sortiesRepo->findAll();
+
+
+
+       // }else
+           // if($organisateur != NAN){
+         //       $listeSorties=$sortiesRepo->findOutingOuJESuisLOrg($organisateur);
+         //   }
+
 
         return $this->render('outing/listeSorties.html.twig',[
             'listeSorties'=>$listeSorties,
             'user'=>$user,
-            ]);
+            'listeCampus'=>$listeCampus
+        ]);
+
+
+
+
+
+
     }
 
     /**

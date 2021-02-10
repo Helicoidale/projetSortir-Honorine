@@ -8,13 +8,40 @@
             <h1>Les sorties : </h1>
 
 
+            <p>Filtrer les sorties :</p>
+
+            <div class="container">
+                <form method="GET">
+                    <div class="Selectionner campus">
 
 
-            <form>
+                        <!-- Choix du campus beandeau deroulant-->
+                        <select name="campusSelected" class="form-select" aria-label="Default select example">
+                            <option value="null" selected>Sélectionnez un campus</option>
+                            {% for campus in listeCampus %}
+                                <option value="{{ campus.id }}">{{ campus.nom }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+
+                    <!-- les checkbox-->
             <div>
                 <input  type="checkbox" id="organisateur" value="{{ user.id }}" name="organisateur">
-                <label for="organisateur">Sortie dont je suis l organisateur</label>
+                <label for="organisateur">Sortie dont je suis l organisateur/trice</label>
             </div>
+                <div>
+                    <input  type="checkbox" id="jeSuisInscrit" value="{{ user.id }}" name="JeSuisInscrit">
+                    <label for="JeSiusInscrit">Sorties auxquelles je suis inscrit/e</label>
+                </div>
+                <div>
+                    <input  type="checkbox" id="nonInscrit" value="{{ user.id }}" name="nonInscrit">
+                    <label for="nonInscrit">Sorties auxquelles je ne suis pas inscrit/e</label>
+                </div>
+                <div>
+                    <input  type="checkbox" id="sortiesPassees" value="{{ user.id }}" name="sortiesPassees">
+                    <label for="sortiesPassees">Sorties passées</label>
+                </div>
 
                 <INPUT class="btn btn-primary"  type="submit" name="nom" value="valider">
 
@@ -25,7 +52,7 @@
 
 
 
-
+                <!-- le tableau-->
 
             <div class="container table-wrapper-scroll-y my-custom-scrollbar">
                 <table class="table table-bordered table-striped mb-0">
@@ -56,6 +83,7 @@
                     {% endfor %}
                     </tbody>
                 </table>
+        </div>
         </div>
         </div>
 {% endblock %}

@@ -34,10 +34,10 @@ class OutingRepository extends ServiceEntityRepository
 
     }
 
-    public function findByFiltre($campusSelected ,$organisateur,$jeSuisInscrit,$nonInscrit,$sortiesPassees)
+    public function findByFiltre($campusSelected ,$organisateur,$jeSuisInscrit,$nonInscrit,$sortiesPassees,$rechercheSorties)
     {
         dump("hello");
-        dump("campus :" . $campusSelected . "orga :" . $organisateur . " inscrit :" . $jeSuisInscrit . " nonInscrit :" . $nonInscrit . " oldsorties : " . $sortiesPassees);
+        dump("campus :" . $campusSelected . "orga :" . $organisateur . " inscrit :" . $jeSuisInscrit . " nonInscrit :" . $nonInscrit . " oldsorties : " . $sortiesPassees . " recherche : ".$rechercheSorties);
 
         $today = new dateTime();
 
@@ -60,11 +60,9 @@ class OutingRepository extends ServiceEntityRepository
                 ->setParameter('user', $organisateur);
         }
 
-
         if (!empty($jeSuisInscrit) && !empty($nonInscrit)) {
 
             dump("voila voila !");
-
 
         } else
             {
@@ -96,6 +94,13 @@ class OutingRepository extends ServiceEntityRepository
                 ->setParameter('date', $today);
         }
 
+        if(!empty($rechercheSorties)) {
+            $queryBuilder
+                ->andWhere('o.nom LIKE :r')
+                ->setParameter('r', "%{$rechercheSorties}%");
+            dump($rechercheSorties);
+            dump("dans recherche");
+        }
 
         return $queryBuilder->getQuery()->getResult();
     }

@@ -7,56 +7,67 @@
         <div class="example-wrapper">
             <h1>Les sorties : </h1>
 
-
             <p>Filtrer les sorties :</p>
-
-            <div class="container">
-                <form method="GET">
-                    <div class="Selectionner campus">
-
-
+            <div class="row">
+                <div class="container col-md-4">
+                    <form method="GET" >
                         <!-- Choix du campus beandeau deroulant-->
-                        <select name="campusSelected" class="form-select" aria-label="Default select example">
-                            <option value= ""  selected>Sélectionnez un campus</option>
-                            {% for campus in listeCampus %}
-                                <option value="{{ campus.id }}">{{ campus.nom }}</option>
-                            {% endfor %}
-                        </select>
+                        <div class="Selectionner campus">
+                            <select name="campusSelected" class="form-select" aria-label="Default select example">
+                                <option value= ""  selected>Sélectionnez un campus</option>
+                                {% for campus in listeCampus %}
+                                    <option value="{{ campus.id }}">{{ campus.nom }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <!-- recherche -->
+                        <div>
+                            <label for="rechercheSorties">Rechercher une sortie</label>
+                            <input  type="text" id="rechercheSorties" value="" name="rechercheSorties">
+                        </div>
+                        <!-- choix des dates -->
+
+                        <label for="dateEntre">Entre:</label>
+                        <input type="date" id="dateEntre" name="dateEntre"
+                               value=""
+                               min="2018-01-01" max="2200-12-31">
+
+                        <label for="etDate">Entre:</label>
+                        <input type="date" id="etDate" name="etDate"
+                               value=""
+                               min="2018-01-01" max="2200-12-31">
+
+                    </form>
+                </div>
+
+                        <!-- les checkbox-->
+                        <div class="container col-md-4 ">
+                            <form>
+                                <div>
+                                <input  type="checkbox" id="organisateur" value="{{ user.id }}" name="organisateur">
+                                <label for="organisateur">Sortie dont je suis l organisateur/trice</label>
+                                </div>
+                                <div>
+                                    <input  type="checkbox" id="jeSuisInscrit" value="{{ user.id }}" name="jeSuisInscrit">
+                                    <label for="jeSuisInscrit">Sorties auxquelles je suis inscrit/e</label>
+                                </div>
+                                <div>
+                                    <input  type="checkbox" id="nonInscrit" value="{{ user.id }}" name="nonInscrit">
+                                    <label for="nonInscrit">Sorties auxquelles je ne suis pas inscrit/e</label>
+                                </div>
+                                <div>
+                                    <input  type="checkbox" id="sortiesPassees" value="{{ user.id }}" name="sortiesPassees">
+                                    <label for="sortiesPassees">Sorties passées</label>
+                                </div>
+
+                            </form>
+                        </div>
+
+                        <!-- le bouton validation-->
+                    <div class="col-md-4">
+                        <INPUT class="btn btn-primary w-100"  type="submit" name="nom" value="valider">
                     </div>
-
-                    <!-- choix des dates -->
-
-
-
-
-
-
-                    <!-- les checkbox-->
-            <div>
-                <input  type="checkbox" id="organisateur" value="{{ user.id }}" name="organisateur">
-                <label for="organisateur">Sortie dont je suis l organisateur/trice</label>
             </div>
-                <div>
-                    <input  type="checkbox" id="jeSuisInscrit" value="{{ user.id }}" name="jeSuisInscrit">
-                    <label for="jeSuisInscrit">Sorties auxquelles je suis inscrit/e</label>
-                </div>
-                <div>
-                    <input  type="checkbox" id="nonInscrit" value="{{ user.id }}" name="nonInscrit">
-                    <label for="nonInscrit">Sorties auxquelles je ne suis pas inscrit/e</label>
-                </div>
-                <div>
-                    <input  type="checkbox" id="sortiesPassees" value="{{ user.id }}" name="sortiesPassees">
-                    <label for="sortiesPassees">Sorties passées</label>
-                </div>
-
-                <INPUT class="btn btn-primary"  type="submit" name="nom" value="valider">
-
-            </form>
-            <br>
-            <a href="{{ path('outing_listeSorties') }}?organisateur={{ user.id }}">Sortie dont je suis l organisateur</a>
-
-
-
 
                 <!-- le tableau-->
 
@@ -89,14 +100,14 @@
                             {% endif %}
                         {% endfor %}
                     </td>
-                    <td>{{sortie.organisateur.getnom |capitalize }}</td>
+                    <td><a href="{{ path('user_unProfil',{'id': sortie.organisateur.getId} ) }}" >{{sortie.organisateur.getnom |capitalize }}</a></td>
                     <td><a href="{{ path('outing_detailSortie',{'id': sortie.id} ) }}">{{ sortie.id }}---Afficher</a> </td>
                     </tr>
 
                     {% endfor %}
                     </tbody>
                 </table>
+            </div>
         </div>
-        </div>
-        </div>
+
 {% endblock %}

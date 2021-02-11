@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class OutingController extends AbstractController
 {
@@ -84,27 +85,56 @@ class OutingController extends AbstractController
      * @return mixed
      * @Route ( "/outing/add", name="outing_add")
      */
-    public function addSortie(Request $request){
+    public function addSortie(Request $request ){
 
         dump($request);
 
         $outing= new Outing();
 
-        dump($outing);
-
-        $form=$this->createForm(OutingType::class);
+        $form=$this->createForm(OutingType::class,$outing);
         $form->handleRequest($request);
 
-           if($form->isSubmitted()){
+
+           if($form->isSubmitted()&&$form->isValid()){
+               dump("je suis rentrer dans la fonction form submit");
+
+
+                dump($form->get('enregistrer')->isClicked());
+
+               if($choix=$form->get('enregistrer')->isClicked()){
+                   dump("j'ai cliquer sur enregistrer");
                $outing->setOrganisateur($this->getUser());
                $outing->setCampus($this->getUser()->getCampus ());
+               $outing->setEtat('1');
+
                $this->getDoctrine()->getManager()->persist($outing);
                 $this->getDoctrine()->getManager()->flush();
                     dump($outing);
+                   $this->addFlash('notice','Vous avez bien enregistrer la creation de votre sortie, celle ci n est pour l instant pas publier !');
                 return $this->redirectToRoute('outing_listeSorties');
-            }
+                }
 
-        dump("je suis rentrer dans la fonction");
+               if($form->getClickedButton() && 'publier'){
+                   dump("j'ai cliquer sur publier");
+                   $outing->setOrganisateur($this->getUser());
+                   $outing->setCampus($this->getUser()->getCampus ());
+                   $outing->setEtat('2');
+
+                   $this->getDoctrine()->getManager()->persist($outing);
+                   $this->getDoctrine()->getManager()->flush();
+                   dump($outing);
+                   $this->addFlash('notice','Vous avez bien publier la creation de votre sortie !');
+                   return $this->redirectToRoute('outing_listeSorties');
+               }
+
+               if($form->getClickedButton() && 'annuler'){
+                   dump("j'ai cliquer sur annuler");
+                    $this->addFlash('notice','Vous avez bien annuler la creation de votre sortie !');
+                   return $this->redirectToRoute('outing_listeSorties');
+               }
+
+           }
+        dump("j'ai traverser' dans la fonction");
         return $this->render('outing/creerNewSortie.html.twig',[
             'form'=>$form->createView(),
 

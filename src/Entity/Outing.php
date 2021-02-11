@@ -30,7 +30,7 @@ class Outing
     private $dateHeureDebut;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="time", nullable=true)
      */
     private $duree;
 

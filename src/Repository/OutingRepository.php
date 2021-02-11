@@ -8,7 +8,7 @@ use App\Form\OutingType;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Request;
+
 
 
 /**
@@ -102,17 +102,29 @@ class OutingRepository extends ServiceEntityRepository
             dump(" date entre  {$dateEntre}");
             dump(" et date  {$etDate}");
 
-             if(($dateEntre)){
+             if(($dateEntre && !$etDate)){
+                 dump("date de debut");
                  $queryBuilder
                      ->andWhere('o.dateHeureDebut >= :date')
                      ->setParameter('date', $dateEntre);
 
              }
 
-            if(($etDate)) {
+            if(($etDate && !$dateEntre)) {
+                dump("date de fin");
                 $queryBuilder
                     ->andWhere('o.dateHeureDebut <= :date')
                     ->setParameter('date', $etDate);
+
+            }
+
+            if(($dateEntre && $etDate)){
+                dump("date de debut et de fin");
+                $queryBuilder
+                    ->andWhere('o.dateHeureDebut >= :date','o.dateHeureDebut >= :date')
+                    ->setParameter('date', $dateEntre)
+                    ->Having('o.dateHeureDebut >= :datefin')
+                    ->setParameter('datefin', $etDate);
 
             }
 

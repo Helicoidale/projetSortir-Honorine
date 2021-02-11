@@ -8,9 +8,10 @@
             <h1>Les sorties : </h1>
 
             <p>Filtrer les sorties :</p>
-            <div class="row">
-                <div class="container col-md-4">
-                    <form method="GET" >
+            <div class="container" >
+                <form  method="GET" >
+                    <div class="col-md-4">
+
                         <!-- Choix du campus beandeau deroulant-->
                         <div class="Selectionner campus">
                             <select name="campusSelected" class="form-select" aria-label="Default select example">
@@ -37,12 +38,12 @@
                                value=""
                                min="2018-01-01" max="2200-12-31">
 
-                    </form>
-                </div>
+
+                    </div>
 
                         <!-- les checkbox-->
-                        <div class="container col-md-4 ">
-                            <form>
+                        <div class=" col-md-4 ">
+
                                 <div>
                                 <input  type="checkbox" id="organisateur" value="{{ user.id }}" name="organisateur">
                                 <label for="organisateur">Sortie dont je suis l organisateur/trice</label>
@@ -60,13 +61,14 @@
                                     <label for="sortiesPassees">Sorties passées</label>
                                 </div>
 
-                            </form>
+
                         </div>
 
                         <!-- le bouton validation-->
                     <div class="col-md-4">
                         <INPUT class="btn btn-primary w-100"  type="submit" name="nom" value="valider">
                     </div>
+            </form>
             </div>
 
                 <!-- le tableau-->

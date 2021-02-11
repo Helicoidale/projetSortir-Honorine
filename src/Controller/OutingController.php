@@ -46,7 +46,7 @@ class OutingController extends AbstractController
         $nonInscrit=isset($_GET['nonInscrit']) ? $_GET['nonInscrit'] : NULL;
         $sortiesPassees=isset($_GET['sortiesPassees']) ? $_GET['sortiesPassees'] : NULL;
         $rechercheSorties=isset($_GET['rechercheSorties']) ? $_GET['rechercheSorties'] : NULL;
-        $entreDate=isset($_GET['entreDate']) ? $_GET['entreDate'] : NULL;
+        $dateEntre=isset($_GET['dateEntre']) ? $_GET['dateEntre'] : NULL;
         $etDate=isset($_GET['etDate']) ? $_GET['etDate'] : NULL;
 
         dump($campusSelected);
@@ -55,12 +55,12 @@ class OutingController extends AbstractController
         dump($nonInscrit);
         dump($sortiesPassees);
         dump($rechercheSorties);
-        dump($entreDate);
+        dump("entre date :". $dateEntre);
         dump($etDate);
 
         //========= passage des champs a la fonction findByFiltre =======
 
-        if($campusSelected== null && $organisateur== null && $jeSuisInscrit== null && $nonInscrit== null && $sortiesPassees== null && $rechercheSorties==null ){
+        if($campusSelected== null && $organisateur== null && $jeSuisInscrit== null && $nonInscrit== null && $sortiesPassees== null && $rechercheSorties==null && $dateEntre==null && $etDate==null){
             dump("je suis là fonction ou tout est null");
             $sortiesRepo = $this->getDoctrine()->getRepository(Outing::class);
             $listeSorties = $sortiesRepo->findAll();
@@ -68,7 +68,7 @@ class OutingController extends AbstractController
         else {
             dump("sinon je suis la foction avec filtre");
             $sortiesRepo = $this->getDoctrine()->getRepository(Outing::class);
-            $listeSorties = $sortiesRepo->findByFiltre($campusSelected, $organisateur,$jeSuisInscrit,$nonInscrit,$sortiesPassees,$rechercheSorties);
+            $listeSorties = $sortiesRepo->findByFiltre($campusSelected, $organisateur,$jeSuisInscrit,$nonInscrit,$sortiesPassees,$rechercheSorties,$dateEntre,$etDate);
 
         }
 

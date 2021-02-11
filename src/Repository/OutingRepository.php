@@ -36,7 +36,7 @@ class OutingRepository extends ServiceEntityRepository
 
     }
 
-    public function findByFiltre($campusSelected ,$organisateur,$jeSuisInscrit,$nonInscrit,$sortiesPassees,$rechercheSorties)
+    public function findByFiltre($campusSelected ,$organisateur,$jeSuisInscrit,$nonInscrit,$sortiesPassees,$rechercheSorties,$dateEntre,$etDate)
     {
         dump("hello");
         dump("campus :" . $campusSelected . "orga :" . $organisateur . " inscrit :" . $jeSuisInscrit . " nonInscrit :" . $nonInscrit . " oldsorties : " . $sortiesPassees . " recherche : ".$rechercheSorties);
@@ -95,6 +95,30 @@ class OutingRepository extends ServiceEntityRepository
                 ->andWhere('o.dateHeureDebut < :date')
                 ->setParameter('date', $today);
         }
+
+
+        if(($dateEntre && $etDate)||($dateEntre || $etDate))
+        {
+            dump(" date entre  {$dateEntre}");
+            dump(" et date  {$etDate}");
+
+             if(($dateEntre)){
+                 $queryBuilder
+                     ->andWhere('o.dateHeureDebut >= :date')
+                     ->setParameter('date', $dateEntre);
+
+             }
+
+            if(($etDate)) {
+                $queryBuilder
+                    ->andWhere('o.dateHeureDebut <= :date')
+                    ->setParameter('date', $etDate);
+
+            }
+
+        }
+
+
 
         if(!empty($rechercheSorties)) {
             $queryBuilder

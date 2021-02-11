@@ -16,7 +16,7 @@ class UserController extends AbstractController
     /**
      * @Route("/monProfil", name="user_monProfil")
      */
-    public function afficherProfil(): Response
+    public function afficherProfil(Request $request): Response
     {
 
         $user = $this->getUser();
@@ -102,12 +102,9 @@ class UserController extends AbstractController
         $autreUser=$userRepo->find($autreUser);
         dump($autreUser);
 
-
-        $campus = $this->getUser()->getCampus()->getnom();
-
         return $this->render('user/unProfil.html.twig', [
             'autreUser' => $autreUser,
-            'campus' => $campus,
+
         ]);
     }
 

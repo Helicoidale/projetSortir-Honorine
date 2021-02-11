@@ -68,7 +68,7 @@
                     <div class="col-md-4">
                         <INPUT class="btn btn-primary w-100"  type="submit" name="nom" value="valider">
                     </div>
-            </form>
+                </form>
             </div>
 
                 <!-- le tableau-->
@@ -109,7 +109,9 @@
                     {% endfor %}
                     </tbody>
                 </table>
+
             </div>
+            <a href="{{ path ('outing_add') }}" class=" container btn btn-primary w-100">Creer une nouvelle sortie</a>
         </div>
 
 {% endblock %}

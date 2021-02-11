@@ -322,5 +322,8 @@ class User implements UserInterface
     {
         $this->plainPassword = $password;
     }
-
+    public function __toString()
+    {
+        return $this->nom;
+    }
 }

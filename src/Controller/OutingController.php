@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Campus;
 use App\Entity\Outing;
 
+use App\Form\OutingType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -79,9 +80,42 @@ class OutingController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     * @return mixed
+     * @Route ( "/outing/add", name="outing_add")
+     */
+    public function addSortie(Request $request){
+
+        dump($request);
+
+        $outing= new Outing();
+
+        dump($outing);
+
+        $form=$this->createForm(OutingType::class);
+        $form->handleRequest($request);
+
+           if($form->isSubmitted()){
+               $outing->setOrganisateur($this->getUser());
+               $outing->setCampus($this->getUser()->getCampus ());
+               $this->getDoctrine()->getManager()->persist($outing);
+                $this->getDoctrine()->getManager()->flush();
+                    dump($outing);
+                return $this->redirectToRoute('outing_listeSorties');
+            }
+
+        dump("je suis rentrer dans la fonction");
+        return $this->render('outing/creerNewSortie.html.twig',[
+            'form'=>$form->createView(),
+
+        ]);
+
+    }
+
+    /**
      * @param $id
      * @return Response
-     * @Route ("/outing/{id}",name="outing_detailSortie")
+     * @Route ("/outing/{id}",name="outing_detailSortie" ,requirements={"id":"\d+"})
      */
     public function detailSortie($id):Response
     {
@@ -95,19 +129,14 @@ class OutingController extends AbstractController
         $campusRepo=$this->getDoctrine()->getRepository(Campus::class);
         $campus=$campusRepo->find($idCampus);
 
-        //$idOrganisateur = $detailSortie->getOrganisateur()->getid();
-       // dump($idOrganisateur);
-       // $organisateurRepo=$this->getDoctrine()->getRepository(User::class);
-       // $organisateur=$organisateurRepo->find($idOrganisateur);
-
-
-
-
         return $this->render('outing/detailsortie.html.twig',[
             'sortie'=>$detailSortie,
             'campus'=>$campus
         ]);
     }
+
+
+
 
 }
 

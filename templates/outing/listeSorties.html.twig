@@ -4,80 +4,77 @@
 
 {% block body %}
  <p> Date du jour : </p>
-    <p> Participant : {{ user.getNom}}  {{ user.getPrenom}} </p>
+    <p> Participant : {{ user.getNom}}{{ user.getPrenom}} </p>
 
         <div class="example-wrapper">
             <h1>Les sorties : </h1>
 
 
+
             <p>Filtrer les sorties :</p>
-
-
-            <div class="container" >
-                <form  method="GET" >
-                    <div class="col-md-4">
-
-                        <!-- Choix du campus beandeau deroulant-->
-                        <div class="row">
-                        <div class="Selectionner campus">
-                            <select name="campusSelected" class="form-select" aria-label="Default select example">
-                                <option value= ""  selected>Sélectionnez un campus</option>
-                                {% for campus in listeCampus %}
-                                    <option value="{{ campus.id }}">{{ campus.nom }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <!-- recherche -->
-                        <div>
-                            <label for="rechercheSorties">Rechercher une sortie</label>
-                            <input  type="text" id="rechercheSorties" value="" name="rechercheSorties">
-                        </div>
-                        <!-- choix des dates -->
-                            <label class="date" for="meeting-time"></label>
-                        <label class="date" for="dateEntre">Entre:</label>
-                        <input type="date" id="dateEntre" name="dateEntre"
-                               value=""
-                               min="2018-01-01" max="2200-12-31">
-
-                        <label class="date" for="etDate">Entre:</label>
-                        <input type="date" id="etDate" name="etDate"
-                               value=""
-                               min="2018-01-01" max="2200-12-31">
-
-                        </div>
-                    </div>
-
-                        <!-- les checkbox-->
+            <div class="container-fluid">
+                <form method="GET">
                     <div class="row">
-                        <div class=" col-md-4 ">
-
+                        <div class="col-md-3">
+                            <div class="col-md-12">
+                                <select name="campusSelected"  class="form-select form-select-lg mb-3" >
+                                    <option value="" selected>Sélectionnez un campus</option>
+                                    {% for campus in listeCampus %}
+                                    <option value="{{ campus.id }}">{{ campus.nom }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <!-- choix des dates -->
+                                <label for="rechercheSorties">Rechercher une sortie</label>
+                                <input  type="text" id="rechercheSorties" value="" name="rechercheSorties" class="form-control  mb-3">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="dateEntre">Entre:</label>
+                                <input type="date" id="dateEntre" name="dateEntre" class="form-select  mb-3"
+                                       value=""
+                                       min="2018-01-01" max="2200-12-31">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="etDate">Et:</label>
+                                <input type="date" id="etDate" name="etDate"
+                                       value=""
+                                       min="2018-01-01" max="2200-12-31">
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <!-- checkbox-->
+                            <div class=" col-md-12 ">
                                 <div>
-                                <input  type="checkbox" id="organisateur" value="{{ user.id }}" name="organisateur">
-                                <label for="organisateur">Sortie dont je suis l organisateur/trice</label>
+                                    <input  type="checkbox" id="organisateur" value="{{ user.id }}" name="organisateur" class="mb-3">
+                                    <label for="organisateur">Sortie dont je suis l organisateur/trice</label>
                                 </div>
                                 <div>
-                                    <input  type="checkbox" id="jeSuisInscrit" value="{{ user.id }}" name="jeSuisInscrit">
+                                    <input  type="checkbox" id="jeSuisInscrit" value="{{ user.id }}" name="jeSuisInscrit" class="mb-3">
                                     <label for="jeSuisInscrit">Sorties auxquelles je suis inscrit/e</label>
                                 </div>
                                 <div>
-                                    <input  type="checkbox" id="nonInscrit" value="{{ user.id }}" name="nonInscrit">
+                                    <input  type="checkbox" id="nonInscrit" value="{{user.id }}" name="nonInscrit" class="mb-3">
                                     <label for="nonInscrit">Sorties auxquelles je ne suis pas inscrit/e</label>
                                 </div>
                                 <div>
-                                    <input  type="checkbox" id="sortiesPassees" value="{{ user.id }}" name="sortiesPassees">
+                                    <input  type="checkbox" id="sortiesPassees" value="{{ user.id }}" name="sortiesPassees" class="mb-3">
                                     <label for="sortiesPassees">Sorties passées</label>
                                 </div>
-
-
-                        </div></div>
-
-                        <!-- le bouton validation-->
-                        <div class="row">
-                    <div class="col-md-4">
-                        <INPUT class="btn btn-primary w-100"  type="submit" name="nom" value="valider">
-                    </div></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <!-- Bouton envoi formulaie filtre-->
+                            <INPUT class="btn btn-primary w-100"  type="submit" name="nom" value="valider">
+                        </div>
+                    </div>
                 </form>
             </div>
+
+
+
+
+
 
                 <!-- le tableau-->
 
@@ -120,6 +117,8 @@
 
             </div>
             <a href="{{ path ('outing_add') }}" class=" container btn btn-primary w-100">Creer une nouvelle sortie</a>
+
         </div>
+
 
 {% endblock %}

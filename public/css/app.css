@@ -3,7 +3,7 @@ global styles
  */
 body {
     margin: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;!important;
 }
 
 .container {
@@ -61,6 +61,7 @@ main {
 
 h1 {
     margin: 0;
+    font-family: 'Roboto', sans-serif;!important;
 }
 
 /**
@@ -93,4 +94,15 @@ th {
     max-width: 1000px; !important;
     width: 95%;
     font: 14px/1.1 sans-serif;
+}
+.typo {
+    font-family: 'Roboto', sans-serif;!important;
+}
+.date {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+.date {
+    margin: .4rem 0;
 }

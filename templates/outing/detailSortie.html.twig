@@ -13,7 +13,7 @@
     <h1>  Détail de la sortie :  {{sortie.nom|capitalize}}   </h1>
 
 
-
+    <div class="container typo">
         <div class="row">
             <div class="col-md-offset-2 col-md-4">Nom de la sortie: {{sortie.nom | capitalize}} </div>
             <div class=" col-md-4">Campus: {{campus.nom | capitalize}}</div>
@@ -43,6 +43,7 @@
             <div class=" col-md-4">Longitude: {{sortie.lieu.getLongitude|default('non renseigné') }} </div>
 
         </div>
+</div>
 
     </div>
 

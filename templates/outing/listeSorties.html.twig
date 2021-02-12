@@ -3,16 +3,22 @@
 {% block title %} Sortir |{{ parent() }}{% endblock %}
 
 {% block body %}
+ <p> Date du jour : </p>
+    <p> Participant : {{ user.getNom}}  {{ user.getPrenom}} </p>
 
         <div class="example-wrapper">
             <h1>Les sorties : </h1>
 
+
             <p>Filtrer les sorties :</p>
+
+
             <div class="container" >
                 <form  method="GET" >
                     <div class="col-md-4">
 
                         <!-- Choix du campus beandeau deroulant-->
+                        <div class="row">
                         <div class="Selectionner campus">
                             <select name="campusSelected" class="form-select" aria-label="Default select example">
                                 <option value= ""  selected>Sélectionnez un campus</option>
@@ -27,21 +33,22 @@
                             <input  type="text" id="rechercheSorties" value="" name="rechercheSorties">
                         </div>
                         <!-- choix des dates -->
-
-                        <label for="dateEntre">Entre:</label>
+                            <label class="date" for="meeting-time"></label>
+                        <label class="date" for="dateEntre">Entre:</label>
                         <input type="date" id="dateEntre" name="dateEntre"
                                value=""
                                min="2018-01-01" max="2200-12-31">
 
-                        <label for="etDate">Entre:</label>
+                        <label class="date" for="etDate">Entre:</label>
                         <input type="date" id="etDate" name="etDate"
                                value=""
                                min="2018-01-01" max="2200-12-31">
 
-
+                        </div>
                     </div>
 
                         <!-- les checkbox-->
+                    <div class="row">
                         <div class=" col-md-4 ">
 
                                 <div>
@@ -62,12 +69,13 @@
                                 </div>
 
 
-                        </div>
+                        </div></div>
 
                         <!-- le bouton validation-->
+                        <div class="row">
                     <div class="col-md-4">
                         <INPUT class="btn btn-primary w-100"  type="submit" name="nom" value="valider">
-                    </div>
+                    </div></div>
                 </form>
             </div>
 

@@ -70,7 +70,7 @@ class OutingRepository extends ServiceEntityRepository
             {
                 $queryBuilder
                     ->addSelect('u')
-                    ->join('o.users', 'u');
+                    ->leftJoin('o.users', 'u');
 
                     if ($jeSuisInscrit) {
                         dump("inscrit {$jeSuisInscrit}");

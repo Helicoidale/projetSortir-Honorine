@@ -105,8 +105,8 @@ class OutingRepository extends ServiceEntityRepository
              if(($dateEntre && !$etDate)){
                  dump("date de debut");
                  $queryBuilder
-                     ->andWhere('o.dateHeureDebut >= :date')
-                     ->setParameter('date', $dateEntre);
+                     ->andWhere('o.dateHeureDebut >= :dateEntre')
+                     ->setParameter('dateEntre', $dateEntre);
 
              }
 
@@ -121,9 +121,9 @@ class OutingRepository extends ServiceEntityRepository
             if(($dateEntre && $etDate)){
                 dump("date de debut et de fin");
                 $queryBuilder
-                    ->andWhere('o.dateHeureDebut >= :date','o.dateHeureDebut >= :date')
-                    ->setParameter('date', $dateEntre)
-                    ->Having('o.dateHeureDebut >= :datefin')
+                    ->andWhere('o.dateHeureDebut >= :dateEntre')
+                    ->setParameter('dateEntre', $dateEntre)
+                    ->andWhere('o.dateHeureDebut <= :datefin')
                     ->setParameter('datefin', $etDate);
 
             }
@@ -140,6 +140,8 @@ class OutingRepository extends ServiceEntityRepository
             dump("dans recherche");
         }
 
+        $queryBuilder
+            ->orderBy('o.dateHeureDebut','ASC');
         return $queryBuilder->getQuery()->getResult();
     }
 

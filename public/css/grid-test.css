@@ -1,0 +1,63 @@
+.cadre {
+    box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.7);
+}
+
+.bordRouge {
+    padding: 10px;
+    border: 1px solid red;
+}
+
+.bordNoir {
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.bordVert {
+    padding: 10px;
+    border: 1px solid green;
+}
+
+.bordBleu {
+    padding: 3px;
+    border: 1px solid blue;
+}
+
+.bordJaune {
+    padding: 10px;
+    border: 1px solid yellow;
+}
+
+.bordOrange {
+    padding: 10px;
+    border: 1px solid orange;
+}
+
+.fondRouge {
+    text-align: center;
+    background-color: red;
+}
+
+.fondVert {
+    text-align: center;
+    background-color: green;
+}
+
+.fondBleu {
+    text-align: center;
+    background-color: blue;
+}
+
+.fondJaune {
+    text-align: center;
+    background-color: yellow;
+}
+
+.fondOrange {
+    text-align: center;
+    background-color: coral;
+}
+
+.green {
+    background-color: greenyellow;
+    border-color: black;
+}
